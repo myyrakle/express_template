@@ -1,3 +1,3 @@
 # express_template
 
-restful
+restful express app template
