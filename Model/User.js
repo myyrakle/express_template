@@ -22,3 +22,5 @@ User.init(
     
     {sequelize:require('./connect'), modelName:'User'}
 );
+
+module.exports = User;

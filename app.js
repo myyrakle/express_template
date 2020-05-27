@@ -13,12 +13,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
+//정적파일 제공
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'test')));
 
+//미들웨어 연결
 app.use(require('./middleware/db'));
+app.use(require('./middleware/auth'));
 
+//라우터 등록
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
