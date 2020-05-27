@@ -17,6 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.static(path.join(__dirname, 'test')));
 
+app.use(require('./middleware/db'));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
