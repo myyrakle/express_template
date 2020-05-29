@@ -1,6 +1,6 @@
 async function database(request, response, next){
     request.db = {
-        User: require('./../Model/User')
+        User: require('./../Model/User'),
     };
 
     next();
