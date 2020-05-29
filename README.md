@@ -2,5 +2,5 @@
 
 restful express app template
 
-database: sequelize
+database: sequelize  
 auth: jwt+session
