@@ -1,9 +1,10 @@
-async function database(request, response, next){
-    request.db = {
-        User: require('./../Model/User'),
-    };
+async function database(request, response, next) {
+  //request.sequelize = require("./../Model/connect");
+  //   request.model = {
+  //     User: require("./../Model/User"),
+  //   };
 
-    next();
+  next();
 }
 
 module.exports = database;

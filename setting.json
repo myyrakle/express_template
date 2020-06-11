@@ -1,0 +1,7 @@
+{
+    "git.suggestSmartCommit": false,
+    "zeplin.preferredApplicationType": "App",
+    "files.autoSave": "afterDelay",
+    "prettier.tabWidth": 4,
+    "prettier.endOfLine": "auto"
+}

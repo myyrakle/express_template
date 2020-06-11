@@ -1,0 +1,14 @@
+{
+    "plugins": ["prettier"],
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+    "rules": {
+      "prettier/prettier": "error",
+      "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "_*"}]
+    },
+    "parserOptions": {
+        "ecmaVersion": 2017
+    },
+    "env": {
+        "node": true
+    }
+}

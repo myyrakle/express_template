@@ -1,9 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', async (request, response, next)=>{
-  response.send('BOOM!!');
+router.get("/f", async (request, response, next) => {
+  try {
+    throw new Error("으아악");
+  } catch (error) {
+    request.error(error);
+  }
+  response.send("BOOM!!");
 });
 
 module.exports = router;
