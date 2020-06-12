@@ -1,4 +1,5 @@
 {
+    "editor.formatOnSave": true,
     "git.suggestSmartCommit": false,
     "zeplin.preferredApplicationType": "App",
     "files.autoSave": "afterDelay",

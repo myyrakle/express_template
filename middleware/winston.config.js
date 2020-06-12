@@ -1,35 +1,37 @@
 const winston = require("winston");
-const winstonDaily = require("winston-daily-rotate-file");
-const { combine, timestamp, printf } = winston.format;
+const WinstonDaily = require("winston-daily-rotate-file");
 
-const customFormat = printf(
-  (info) => `${info.timestamp} ${info.level}: ${info.message}`
+const moment = require("moment");
+require("moment-timezone");
+moment.tz.setDefault("Asia/Seoul");
+const now = () => moment().format("YYYY-MM-DD/h:mm:ss A");
+
+const customFormat = winston.format.printf(
+  (info) => `${now()} ${info.level}: ${info.message}`
 );
 
 const logger = winston.createLogger({
-  format: combine(
-    timestamp({
-      format: "YYYY-MM-DD HH:mm:ss",
-    }),
-    customFormat
-  ),
+  timestamp: now,
+  format: customFormat,
   transports: [
     new winston.transports.Console(),
-    new winstonDaily({
+    new WinstonDaily({
       level: "debug",
-      datePattern: "YYYYMMDD",
+      datePattern: "YYYY-MM-DD",
       dirname: "./logs",
       filename: `template_debug_%DATE%.log`,
       maxSize: null,
       maxFiles: 14,
     }),
-    new winstonDaily({
+    new WinstonDaily({
       level: "error",
-      datePattern: "YYYYMMDD",
+      zippedArchive: true, // 압축여부
+      datePattern: "YYYY-MM-DD",
       dirname: "./logs",
       filename: `template_error_%DATE%.log`,
       maxSize: null,
       maxFiles: 14,
+      json: true,
     }),
   ],
 });

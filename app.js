@@ -2,34 +2,27 @@ const createError = require("http-errors");
 const express = require("express");
 const app = express();
 
+// 내장 미들웨어 연결
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const path = require("path");
+// 서드파티 미들웨어 연결
+app.use(require("cookie-parser"));
 
 const morgan = require("morgan");
 const { stream } = require("./middleware/winston.config");
 app.use(morgan("combined", { stream }));
-app.use((request, response, next) => {
-  request.error = (message) => {
-    console.log(message);
-    stream.error(message);
-  };
-  next();
-});
 
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+// 정적파일 제공
+app.use(express.static("./public"));
+app.use(express.static("./test"));
 
-//정적파일 제공
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "test")));
-
-//미들웨어 연결
+// 사용자 정의 미들웨어 연결
 app.use(require("./middleware/db"));
 app.use(require("./middleware/auth"));
+app.use(require("./middleware/winston"));
 
-//라우터 등록
+// 라우터 등록
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 
