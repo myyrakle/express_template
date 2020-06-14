@@ -7,8 +7,31 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // 서드파티 미들웨어 연결
-app.use(require("cookie-parser"));
+const cors = require("cors");
+const expressSession = require("express-session");
+app.use(require("cookie-parser")());
+app.use(
+  expressSession({
+    secret: "foo", // 비밀 키
+    user_no: "",
+    user_type: "",
+    proxy: true,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 30, // 30분
+    },
+  })
+);
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
 
+// 로거 등록
 const morgan = require("morgan");
 const { stream } = require("./middleware/winston.config");
 app.use(morgan("combined", { stream }));
@@ -22,7 +45,14 @@ app.use(require("./middleware/db"));
 app.use(require("./middleware/auth"));
 app.use(require("./middleware/winston"));
 
+// view engine setup
+app.set("views", "./views");
+app.set("view engine", "ejs");
+
 // 라우터 등록
+app.get("/", (req, res, next) => {
+  res.json("fpp");
+});
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
 

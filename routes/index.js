@@ -1,9 +1,8 @@
 const express = require("express");
-
 const router = express.Router();
 
 /* GET home page. */
-router.get("/f", async (request, response, next) => {
+router.get("/foo", async (request, response, next) => {
   try {
     throw new Error("으아악");
   } catch (error) {
