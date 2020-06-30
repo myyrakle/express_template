@@ -25,7 +25,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000"], // 허용 도메인 목록
     credentials: true,
     optionsSuccessStatus: 200,
   })
