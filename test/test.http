@@ -1,0 +1,19 @@
+@domain = localhost:3000
+
+# 어드민 로그인
+# @name login
+POST http://{{domain}}/auth/login
+
+{
+}
+###
+
+@token = {{login.response.body.token}}
+
+
+# 테스트
+GET http://{{domain}}/test
+
+{
+}
+###
