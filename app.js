@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 const morgan = require("morgan");
 const { stream } = require("./middleware/winston.config");
 app.use(morgan("combined", { stream }));
+app.use(require(`${__dirname}/middleware/winston`));
 
 // 서드파티 미들웨어 연결
 const cors = require("cors");
@@ -51,9 +52,9 @@ const authorizer = require("./middleware/authorizer");
 const key = require("./key/key");
 app.use(
     authorizer({
-        needAuthPaths: ["/*"],
-        needAuthPathsExcept: ["/auth/*"],
-        key: key.privateKey,
+        needAuthPaths: ["^/*"],
+        needAuthPathsExcept: ["^/auth/*"],
+        privateKey: key.privateKey,
     })
 );
 app.use(require("./middleware/winston"));

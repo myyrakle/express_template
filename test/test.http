@@ -13,6 +13,16 @@ POST http://{{domain}}/auth/login
 
 # 테스트
 GET http://{{domain}}/test
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+}
+###
+
+# 테스트
+GET http://{{domain}}/test
+Content-Type: application/json
 
 {
 }
