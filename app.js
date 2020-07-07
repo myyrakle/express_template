@@ -32,6 +32,7 @@ const cors = require("cors");
 //     })
 // );
 
+// CORS 설정
 app.use(
     cors({
         origin: ["http://localhost:3000"], // 허용 도메인 목록
@@ -48,16 +49,16 @@ app.use(express.static("./test"));
 app.use(require("./middleware/db"));
 
 // 인증 설정
-const authorizer = require("./middleware/authorizer");
-const key = require("./key/key");
+const authorizer = require("express-jwt-authorizer");
+const key = require("./key/key"); //key value
 app.use(
     authorizer({
         needAuthPaths: ["^/*"],
-        needAuthPathsExcept: ["^/auth/*"],
+        needAuthPathsExcept: ["^/auth/*", "^/public/*"],
         privateKey: key.privateKey,
+        logger: stream.error,
     })
 );
-app.use(require("./middleware/winston"));
 
 // view engine setup
 app.set("views", "./views");

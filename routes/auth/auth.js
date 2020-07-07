@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/login", async (req, res, next) => {
-    const token = req.authorizer.getToken({ id: 12 });
+    const token = req.authorizer.makeToken({ id: 12 });
     res.json({ token: token });
 });
 

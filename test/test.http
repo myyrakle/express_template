@@ -3,6 +3,7 @@
 # 어드민 로그인
 # @name login
 POST http://{{domain}}/auth/login
+Content-Type: application/json
 
 {
 }
@@ -13,7 +14,7 @@ POST http://{{domain}}/auth/login
 
 # 테스트
 GET http://{{domain}}/test
-Authorization: {{token}}
+Authorization: {{token}}e
 Content-Type: application/json
 
 {
