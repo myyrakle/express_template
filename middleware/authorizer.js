@@ -120,21 +120,9 @@ function createAuthorizer(option) {
         const token = req.headers.authorization;
         const path = req.path;
 
-        let needAuth = false;
-        for (const e of needAuthPaths) {
-            if (e.test(path)) {
-                needAuth = true;
-                break;
-            }
-        }
+        const needAuth = needAuthPaths.some((e) => e.test(path));
 
-        let needAuthExcept = false;
-        for (const e of needAuthPathsExcept) {
-            if (e.test(path)) {
-                needAuthExcept = true;
-                break;
-            }
-        }
+        const needAuthExcept = needAuthPathsExcept.some((e) => e.test(path));
 
         if (needAuth && !needAuthExcept) {
             if (token == undefined) {
