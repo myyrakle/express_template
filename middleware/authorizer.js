@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 
 /**
- * option value:
- * - needAuthPaths
- * - needAuthPathsExcept
- * - expiresIn
- * - algorithm
- * - privateKey
+ * option values:
+ * - privateKey => "......"
+ * - needAuthPaths => ["^/*"]
+ * - needAuthPathsExcept => ["^/auth/*", "^/public/*"]
+ * - expiresIn => 1 (millisecond) | 1ms (millisecond) | 1s (second) | 1m (minute) | 1h (hour) | 1d (day) | 1w (week) | 1y (year)
+ * - algorithm => "HS256" | ...
  */
 function createAuthorizer(option) {
     //유효성 검증
@@ -60,14 +60,6 @@ function createAuthorizer(option) {
         validatePathValues
     );
 
-    // 1 (millisecond)
-    // 1ms (millisecond)
-    // 1s (second)
-    // 1m (minute)
-    // 1h (hour)
-    // 1d (day)
-    // 1w (week)
-    // 1y (year)
     const expiresIn = option.expiresIn || "1h";
 
     // 'RS256', 'RS384', 'RS512',
