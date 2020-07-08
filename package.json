@@ -13,7 +13,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.21.2",
     "express": "~4.16.1",
-    "express-jwt-authorizer": "^0.3.6",
+    "express-jwt-authorizer": "^0.3.7",
     "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "moment": "^2.26.0",
